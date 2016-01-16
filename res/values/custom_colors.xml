@@ -23,4 +23,12 @@
     <color name="qsb_connector">#80f2f2f2</color>
     <color name="qsb_background">#ffffffff</color>
 
+    <!-- Theme exposures -->
+    <color name="folder_name_highlight_text_color">#ffCCCCCC</color>
+    <color name="folder_name_hint_text_color">#ff808080</color>
+    <color name="all_apps_empty_search_text_color">#212121</color>
+    <color name="wallpaper_button_text_color">@android:color/white</color>
+    <color name="widget_button_text_color">@android:color/white</color>
+    <color name="settings_button_text_color">@android:color/white</color>
+
 </resources>
