@@ -18,6 +18,8 @@ package com.android.launcher3;
 
 import android.animation.TimeInterpolator;
 import android.content.Context;
+import android.os.PowerManager;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
@@ -56,12 +58,25 @@ public class PinchToOverviewListener extends ScaleGestureDetector.SimpleOnScaleG
     private PinchThresholdManager mThresholdManager;
     private PinchAnimationManager mAnimationManager;
 
+    private GestureDetector mGestureListener;
+
     public PinchToOverviewListener(Launcher launcher) {
         mLauncher = launcher;
-        mPinchDetector = new ScaleGestureDetector((Context) mLauncher, this);
+        mPinchDetector = new ScaleGestureDetector(mContext, this);
+        mGestureListener =
+                  new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent event) {
+                final PowerManager pm = (PowerManager) mContext.getSystemService(
+                        Context.POWER_SERVICE);
+                pm.goToSleep(event.getEventTime());
+                return true;
+            }
+        });
     }
 
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        mGestureListener.onTouchEvent(ev);
         mPinchDetector.onTouchEvent(ev);
         return mPinchStarted;
     }
