@@ -337,6 +337,9 @@ public class Launcher extends BaseActivity
     public ViewGroupFocusHelper mFocusHandler;
     private boolean mRotationEnabled = false;
 
+    private LauncherTab mLauncherTab;
+    private boolean mLauncherTabEnabled;
+
     @Thunk void setOrientation() {
         if (mRotationEnabled) {
             unlockScreenOrientation(true);
@@ -453,6 +456,9 @@ public class Launcher extends BaseActivity
         // For handling default keys
         mDefaultKeySsb = new SpannableStringBuilder();
         Selection.setSelection(mDefaultKeySsb, 0);
+
+        mLauncherTabEnabled = isLauncherTabEnabled();
+        mLauncherTab = new LauncherTab(this, mLauncherTabEnabled);
 
         mRotationEnabled = getResources().getBoolean(R.bool.allow_rotation);
         // In case we are on a device with locked rotation, we should look at preferences to check
@@ -1050,6 +1056,11 @@ public class Launcher extends BaseActivity
         if (shouldShowDiscoveryBounce()) {
             mAllAppsController.showDiscoveryBounce();
         }
+
+        if (mLauncherTabEnabled) {
+            mLauncherTab.getClient().onResume();
+        }
+
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onResume();
         }
@@ -1070,6 +1081,10 @@ public class Launcher extends BaseActivity
         // debounce excess onHide calls.
         if (mWorkspace.getCustomContentCallbacks() != null) {
             mWorkspace.getCustomContentCallbacks().onHide();
+        }
+
+        if (mLauncherTabEnabled) {
+            mLauncherTab.getClient().onPause();
         }
 
         if (mLauncherCallbacks != null) {
@@ -1580,6 +1595,11 @@ public class Launcher extends BaseActivity
         super.onAttachedToWindow();
 
         FirstFrameAnimatorHelper.initializeDrawListener(getWindow().getDecorView());
+
+        if (mLauncherTabEnabled) {
+            mLauncherTab.getClient().onAttachedToWindow();
+        }
+
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onAttachedToWindow();
         }
@@ -1589,6 +1609,9 @@ public class Launcher extends BaseActivity
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 
+        if (mLauncherTabEnabled) {
+            mLauncherTab.getClient().onDetachedFromWindow();
+        }
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onDetachedFromWindow();
         }
@@ -1630,6 +1653,10 @@ public class Launcher extends BaseActivity
             }
             clearTypedText();
         }
+    }
+
+    private boolean isLauncherTabEnabled() {
+        return Utilities.isShowLeftTab(this);
     }
 
     public DragLayer getDragLayer() {
@@ -1749,6 +1776,10 @@ public class Launcher extends BaseActivity
                 mWidgetsView.scrollToTop();
             }
 
+            if (mLauncherTabEnabled) {
+                mLauncherTab.getClient().hideOverlay(true);
+            }
+
             if (mLauncherCallbacks != null) {
                 mLauncherCallbacks.onHomeIntent();
             }
@@ -1859,6 +1890,10 @@ public class Launcher extends BaseActivity
         LauncherAnimUtils.onDestroyActivity();
 
         clearPendingBinds();
+
+        if (mLauncherTabEnabled) {
+            mLauncherTab.getClient().onDestroy();
+        }
 
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onDestroy();
@@ -4034,6 +4069,17 @@ public class Launcher extends BaseActivity
             if (Utilities.ALLOW_ROTATION_PREFERENCE_KEY.equals(key)) {
                 // Recreate the activity so that it initializes the rotation preference again.
                 recreate();
+            }
+            if (Utilities.SHOW_LEFT_TAB_PREFERENCE_KEY.equals(key)) {
+                if (mLauncherTab != null) {
+                    mLauncherTabEnabled = isLauncherTabEnabled();
+                    mLauncherTab.updateLauncherTab(mLauncherTabEnabled);
+                    if (!mLauncherTabEnabled) {
+                        mLauncherTab.getClient().onDestroy();
+                    } else {
+                        mLauncherTab.getClient().onAttachedToWindow();
+                    }
+                }
             }
         }
     }
