@@ -127,6 +127,7 @@ public final class Utilities {
 
     public static final String ALLOW_ROTATION_PREFERENCE_KEY = "pref_allowRotation";
     public static final String SHOW_LEFT_TAB_PREFERENCE_KEY = "pref_left_tab";
+    public static final String SHOW_SEARCH_BAR_PREFERENCE_KEY = "pref_searchBar";
 
     public static boolean isPropertyEnabled(String propertyName) {
         return Log.isLoggable(propertyName, Log.VERBOSE);
@@ -139,6 +140,10 @@ public final class Utilities {
 
     public static boolean isShowLeftTab(Context context) {
         return getPrefs(context).getBoolean(SHOW_LEFT_TAB_PREFERENCE_KEY, false);
+    }
+
+    public static boolean isShowSearchBar(Context context) {
+        return getPrefs(context).getBoolean(SHOW_SEARCH_BAR_PREFERENCE_KEY, true);
     }
 
     public static boolean getAllowRotationDefaultValue(Context context) {

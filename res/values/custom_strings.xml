@@ -18,6 +18,7 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="search_bar_title">Show search bar</string>
     <string name="left_tab_label">Google Now tab</string>
     <string name="left_tab_description">Toggle Google Now intergration</string>
 </resources>
