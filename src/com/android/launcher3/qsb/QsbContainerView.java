@@ -37,6 +37,7 @@ import android.widget.FrameLayout;
 import com.android.launcher3.AppWidgetResizeFrame;
 import com.android.launcher3.InvariantDeviceProfile;
 import com.android.launcher3.LauncherAppState;
+import com.android.launcher3.LauncherAppWidgetHostView;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.AppWidgetManagerCompat;
@@ -148,7 +149,10 @@ public class QsbContainerView extends FrameLayout {
                         .getAppWidgetOptions(widgetId), opts)) {
                     mQsb.updateAppWidgetOptions(opts);
                 }
-                mQsb.setPadding(0, 0, 0, 0);
+                mQsb.setPadding(mQsb.getPaddingLeft(), 0, mQsb.getPaddingRight(), 0);
+                mQsb.setLayoutParams(new LauncherAppWidgetHostView.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
+                        android.view.Gravity.TOP));
                 mQsbWidgetHost.startListening();
                 return mQsb;
             }
