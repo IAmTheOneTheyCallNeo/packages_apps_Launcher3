@@ -24,4 +24,8 @@
     <string name="icon_pack_summary">Select an icon pack</string>
     <string name="default_iconpack_title">Default icons</string>
 
+    <!-- Pixel -->
+    <string name="label_search">Search</string>
+    <string name="week_day_format">%1$s, %2$s</string>
+
 </resources>
