@@ -521,6 +521,9 @@ public class Launcher extends BaseActivity
      * @param navBar if true, make the nav bar theme match the isLight param.
      */
     public void activateLightSystemBars(boolean isLight, boolean statusBar, boolean navBar) {
+        if (getResources().getBoolean(R.bool.disable_systembars_color_inversion)){
+            isLight = false;
+        }
         int oldSystemUiFlags = getWindow().getDecorView().getSystemUiVisibility();
         int newSystemUiFlags = oldSystemUiFlags;
         if (isLight) {
