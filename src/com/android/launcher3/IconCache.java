@@ -191,6 +191,15 @@ public class IconCache {
     }
 
     /**
+     * Empty out the cache.
+     */
+    public void flush() {
+        synchronized (mCache) {
+            mCache.clear();
+        }
+    }
+
+    /**
      * Remove any records for the supplied ComponentName.
      */
     public synchronized void remove(ComponentName componentName, UserHandleCompat user) {

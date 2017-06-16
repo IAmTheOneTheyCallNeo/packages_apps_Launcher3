@@ -96,6 +96,8 @@ public class IconPackPreference extends Preference {
                 } else {
                     setNone();
                 }
+                LauncherAppState.getInstance().getIconCache().flush();
+                LauncherAppState.getInstance().getModel().forceReload();
             }
         });
         builder.show();
