@@ -34,11 +34,10 @@ public class Settings implements SharedPreferences.OnSharedPreferenceChangeListe
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
         if (key.startsWith("pref_")) {
-            LauncherAppState las = LauncherAppState.getInstance();
             switch (key) {
                 case KEY_PREF_ICON_PACK_PACKAGE:
                 default:
-                    las.reloadAll();
+                    mLauncher.reloadAll();
             }
         }
     }

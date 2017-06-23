@@ -4519,4 +4519,10 @@ public class Launcher extends Activity
             setOrientation();
         }
     }
+
+    public void reloadAll() {
+        mModel.clearIconCache();
+        mModel.resetLoadedState(true, true);
+        mOnResumeNeedsLoad = true;
+    }
 }
