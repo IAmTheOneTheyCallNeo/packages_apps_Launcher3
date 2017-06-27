@@ -21,6 +21,7 @@
 
     <!-- Icon Pack -->
     <string name="icon_pack">Icon pack</string>
-    <string name="select_pack">Select an icon pack</string>
+    <string name="icon_pack_summary">Select an icon pack</string>
+    <string name="default_iconpack_title">Default icons</string>
 
 </resources>
