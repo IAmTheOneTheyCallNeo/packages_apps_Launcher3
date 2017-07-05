@@ -30,6 +30,7 @@
     <color name="all_apps_search_text_color">#4c4c4c</color>
     <color name="wallpaper_button_text_color">@android:color/white</color>
     <color name="widget_button_text_color">@android:color/white</color>
+    <color name="widgets_cell_color">#263238</color>
     <color name="settings_button_text_color">@android:color/white</color>
 
 </resources>
