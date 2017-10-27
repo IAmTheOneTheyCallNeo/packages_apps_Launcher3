@@ -25,7 +25,7 @@
     <!-- From O and above, we show a dark nav bar in all-apps -->
     <style name="AllAppsNavBarProtection">
         <item name="android:alpha">0.6</item>
-        <item name="android:background">?android:attr/colorPrimary</item>
+        <item name="android:background">@color/all_apps_navbar_color</item>
     </style>
 
 </resources>
