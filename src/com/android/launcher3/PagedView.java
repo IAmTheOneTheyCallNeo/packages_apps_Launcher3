@@ -64,10 +64,10 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
     protected static final int INVALID_PAGE = -1;
 
     // the min drag distance for a fling to register, to prevent random page shifts
-    private static final int MIN_LENGTH_FOR_FLING = 25;
+    private static final int MIN_LENGTH_FOR_FLING = 10;
 
-    public static final int PAGE_SNAP_ANIMATION_DURATION = 750;
-    protected static final int SLOW_PAGE_SNAP_ANIMATION_DURATION = 950;
+    public static final int PAGE_SNAP_ANIMATION_DURATION = 100;
+    protected static final int SLOW_PAGE_SNAP_ANIMATION_DURATION = 100;
 
     // OverScroll constants
     private final static int OVERSCROLL_PAGE_SNAP_ANIMATION_DURATION = 270;
